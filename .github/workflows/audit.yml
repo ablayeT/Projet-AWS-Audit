@@ -12,11 +12,18 @@ jobs:
       - name: Récupération du code
         uses: actions/checkout@v3
 
-      - name: Installation et Scan Prowler
-        # Image Docker officielle de Prowler pour scanner
-        uses: toniblyx/prowler-github-action@master
+      - name: Installation de Python
+        uses: actions/setup-python@v4
         with:
-          args: aws --services ec2 --region us-east-1 --checks ec2_securitygroup_allow_ingress_from_internet_to_any_port
+          python-version: '3.9'
+
+      - name: Installation de Prowler
+        run: pip install prowler
+
+      - name: Lancement du Scan
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+        # On lance Prowler pour scanner spécifiquement la faille SSH (port 22 ouvert)
+        run: prowler aws --checks ec2_securitygroup_allow_ingress_from_internet_to_any_port --region us-east-1 --no-banner
