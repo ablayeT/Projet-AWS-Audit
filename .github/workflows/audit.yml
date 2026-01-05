@@ -2,7 +2,7 @@ name: Audit de Sécurité Cloud
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   prowler-scan:
@@ -15,7 +15,7 @@ jobs:
       - name: Installation de Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Installation de Prowler
         run: pip install prowler
@@ -26,4 +26,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
         # On lance Prowler pour scanner spécifiquement la faille SSH (port 22 ouvert)
-        run: prowler aws --checks ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_22 --region us-east-1 --no-banner
+        # On scanne toute la catégorie "Exposition Internet"
+        run: prowler aws --categories internet-exposed --region us-east-1 --no-banner
