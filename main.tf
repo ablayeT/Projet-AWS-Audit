@@ -8,13 +8,22 @@ resource "aws_security_group" "sg_passoire" {
   description = "Security Group intentionnellement vulnerable pour Audit"
 
   # Regle d'entree (Ingress) : C'est ici qu'est la faille !
+  # ingress {
+  #   description = "SSH ouvert au monde entier"
+  #   from_port   = 22
+  #   to_port     = 22
+  #   protocol    = "tcp"
+  #   # 0.0.0.0/0 signifie "Toutes les adresses IP de la Terre"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
+
   ingress {
-    description = "SSH ouvert au monde entier"
+    description = "SSH restreint a une adresse IP interne (Admin)"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    # 0.0.0.0/0 signifie "Toutes les adresses IP de la Terre"
-    cidr_blocks = ["0.0.0.0/0"]
+    # CORRECTION : On remplace 0.0.0.0/0 (Internet) par une IP précise
+    cidr_blocks = ["10.0.0.5/32"]
   }
 
   # Regle de sortie (Egress) : On laisse tout sortir (standard)
