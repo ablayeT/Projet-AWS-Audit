@@ -27,4 +27,4 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
        
         # vérifier spécifiquement le port 22 (SSH)
-        run: prowler aws --checks ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_22 --filter-resource sg-0411ff2f3f047405b --region us-east-1 --no-banner
+        run: prowler aws --checks ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_22 --region us-east-1 --no-banner
