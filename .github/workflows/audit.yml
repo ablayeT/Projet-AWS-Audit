@@ -25,6 +25,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
-        # On filtre pour ne scanner QUE votre groupe de sécurité spécifique
-        # On vérifie spécifiquement le port 22 (SSH)
-        run: prowler aws --checks ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_22 --filter-resource sg-023bf14d37ec193b5 --region us-east-1 --no-banner
+       
+        # vérifier spécifiquement le port 22 (SSH)
+        run: prowler aws --checks ec2_securitygroup_allow_ingress_from_internet_to_tcp_port_22 --filter-resource sg-0411ff2f3f047405b --region us-east-1 --no-banner
