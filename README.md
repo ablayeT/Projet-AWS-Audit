@@ -84,3 +84,4 @@ Lancer l'audit : Effectuez un commit et un push sur la branche main. L'onglet "A
 
 Projet réalisé dans le cadre de ma montée en compétence en Cybersécurité Cloud.
 
+<div align="center"> <sub>Developppé par Abdou<b>Abdou</b> - Cybersecurity Lab</sub> </div>
